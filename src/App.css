@@ -1,4 +1,15 @@
 body {
     font-family: 'Open Sans Condensed', sans-serif;
-    padding: 120px 360px;
+    padding: 2%;
+}
+
+.shop-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2% 0%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
