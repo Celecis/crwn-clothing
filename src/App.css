@@ -13,3 +13,9 @@ a {
     text-decoration: none;
     color: black;
 }
+
+* {
+    /* adsada adding the above line will make so that paddings and margins
+    don't affect the total width of our elements :D cool! */
+    box-sizing: border-box;
+}
