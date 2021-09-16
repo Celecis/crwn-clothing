@@ -10,11 +10,14 @@ const CollectionPreview = ({ title, items }) => (
     <div className="preview">
       {items
         .filter((item, index) => index < 4)
-        .map(({ id, ...otherItemProps }) => (
-          <CollectionItem key={id} {...otherItemProps} />
+        .map((item) => (
+          <CollectionItem key={item.id} item={item} />
         ))}
     </div>
   </div>
 );
+
+// SINCE WE NEED THE ITEM ITSELF, we now need to pass in the whole item
+// instead of spreading out ...otherItemProps
 
 export default CollectionPreview;
