@@ -46,3 +46,18 @@ export const selectCartItemsCount = createSelector(
 // that wil then be apointed to itemCount inside mapStateToProps
 // that we can then use it (mapStateToProps) to pass itemCount as a prop
 // to our CartIcon component
+
+// 2: OUTPUT SELECTOR:
+export const selectCartHidden = createSelector(
+  [selectCart],
+  (cart) => cart.hidden
+);
+
+// 2: OUTPUT SELECTOR:
+export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
+  cartItems.reduce(
+    (accumalatedQuantity, cartItem) =>
+      accumalatedQuantity + cartItem.quantity * cartItem.price,
+    0
+  )
+);
