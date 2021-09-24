@@ -10,10 +10,9 @@ export const selectCollections = createSelector(
 
 //2: OUTPUT SELECTOR
 export const selectCollection = (collectionUrlParam) =>
-  // collectionUrlParam is a string
-  createSelector(
-    [selectCollections],
-    (collections) => collections[collectionUrlParam]
+  //collectionUrlParam is a string
+  createSelector([selectCollections], (collections) =>
+    collections ? collections[collectionUrlParam] : null
   );
 
 // AND REMENBER: to find a property name inside an object, using a string, we need to use the []
@@ -23,7 +22,8 @@ export const selectCollection = (collectionUrlParam) =>
 // TRANSFORMING OBJECT INTO ARRAY
 export const selectCollectionForPreviews = createSelector(
   [selectCollections],
-  (collections) => Object.keys(collections).map((key) => collections[key])
+  (collections) =>
+    collections ? Object.keys(collections).map((key) => collections[key]) : []
 );
 
 // Object.keys
