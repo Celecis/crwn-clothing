@@ -20,7 +20,7 @@ export const selectCollection = (collectionUrlParam) =>
 
 //2: OUTPUT SELECTOR
 // TRANSFORMING OBJECT INTO ARRAY
-export const selectCollectionForPreviews = createSelector(
+export const selectCollectionsForPreview = createSelector(
   [selectCollections],
   (collections) =>
     collections ? Object.keys(collections).map((key) => collections[key]) : []
@@ -28,3 +28,14 @@ export const selectCollectionForPreviews = createSelector(
 
 // Object.keys
 // Transforms gets object keys and adds them into an array
+
+export const selectIsCollectionFetching = createSelector(
+  [selectShop],
+  (shop) => shop.isFetching
+);
+
+//191
+export const selectIsCollectionsLoaded = createSelector(
+  [selectShop],
+  (shop) => !!shop.collections
+);
