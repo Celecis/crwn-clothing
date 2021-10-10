@@ -16,3 +16,9 @@ const WithSpinner = (WrappedComponent) => {
 };
 
 export default WithSpinner;
+
+// withSpinner is a HOC: Higher Order Component
+// it's a function that recieves a component
+// that we want to wrap the functionality of our WithSpinner feature with
+// and that passed in component gets passed into*wrapped into A NEW new component that will be returned
+// depending on the condition if isLoading is true or false

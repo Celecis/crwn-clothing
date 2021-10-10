@@ -5,24 +5,20 @@ import CollectionItem from "../../components/collection-item/collection-item.com
 
 import { selectCollection } from "../../redux/shop/shop.selectors";
 
-import {
-  CollectionPageContainer,
-  CollectionTitle,
-  CollectionItemsContainer,
-} from "./collection.styles";
+import "./collection.styles.scss";
 
 const CollectionPage = ({ collection }) => {
   // we can have access to collectionId dinamically trough props passed by mapStateToProps
   const { title, items } = collection;
   return (
-    <CollectionPageContainer>
-      <CollectionTitle>{title}</CollectionTitle>
-      <CollectionItemsContainer>
+    <div className="collection-page">
+      <h2 className="title">{title}</h2>
+      <div className="items">
         {items.map((item) => (
           <CollectionItem key={item.id} item={item} />
         ))}
-      </CollectionItemsContainer>
-    </CollectionPageContainer>
+      </div>
+    </div>
   );
 };
 

@@ -12,6 +12,7 @@ import CheckoutPage from "./pages/checkout/checkout.component";
 
 import Header from "./components/header/header.component";
 
+//177
 import {
   auth,
   createUserProfileDocument,
@@ -20,13 +21,10 @@ import {
 
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
-import { selectCollectionForPreviews } from "./redux/shop/shop.selectors";
+//177
+import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 
 class App extends React.Component {
-  state = {
-    loading: true,
-  };
-
   unsubscribeFromAuth = null;
 
   componentDidMount() {
@@ -45,7 +43,10 @@ class App extends React.Component {
       }
 
       setCurrentUser(userAuth);
-      addCollectionAndDocuments("collections", collectionsArray);
+      addCollectionAndDocuments(
+        "collections",
+        collectionsArray.map(({ title, items }) => ({ title, items }))
+      );
     });
   }
 
@@ -81,7 +82,7 @@ class App extends React.Component {
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   //firestore upload old SHOP_DATA data & retrieve data from firestore
-  collectionsArray: selectCollectionForPreviews,
+  collectionsArray: selectCollectionsForPreview,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -90,7 +91,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);*/
 
-//after 188
+// AFTER 178
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";

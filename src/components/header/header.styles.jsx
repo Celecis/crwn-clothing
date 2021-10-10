@@ -27,3 +27,6 @@ export const OptionLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
 `;
+
+// we can add a custom component and use it
+// where there are multiple classes that use those atributes

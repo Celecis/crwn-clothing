@@ -18,6 +18,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: addItemToCart(state.cartItems, action.payload),
       };
+    case CartActionTypes.REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: removeItemFromCart(state.cartItems, action.payload),
+      };
     case CartActionTypes.CLEAR_ITEM_FROM_CART:
       return {
         ...state,
@@ -29,11 +34,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         // it will return a new array with the selected cartItem
         // (that will be defined when clicked on the remove button in our CheckoutPage)
         // filtered out
-      };
-    case CartActionTypes.REMOVE_ITEM:
-      return {
-        ...state,
-        cartItems: removeItemFromCart(state.cartItems, action.payload),
       };
     default:
       return state;

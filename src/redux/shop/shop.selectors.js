@@ -10,7 +10,6 @@ export const selectCollections = createSelector(
 
 //2: OUTPUT SELECTOR
 export const selectCollection = (collectionUrlParam) =>
-  //collectionUrlParam is a string
   createSelector([selectCollections], (collections) =>
     collections ? collections[collectionUrlParam] : null
   );
@@ -29,13 +28,23 @@ export const selectCollectionsForPreview = createSelector(
 // Object.keys
 // Transforms gets object keys and adds them into an array
 
+//
+//
+// AFTER 189
+// we also need to create a selector to pull in isFetching property
 export const selectIsCollectionFetching = createSelector(
   [selectShop],
   (shop) => shop.isFetching
 );
 
-//191
+//AFTER 191
 export const selectIsCollectionsLoaded = createSelector(
   [selectShop],
   (shop) => !!shop.collections
 );
+
+//!! truthy of falsy value
+// our selector will see if our collections is loaded
+// if there is no collections, then it is false
+// so we need to invert that in our shop.component.jsx
+// so that the spinner renders while the API is being fetched

@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components";
 
-//adding 3 styles to buttonStyles, depending on it's condition
-//conditionally rendering css styles instead of class names in our component
+// adding 3 styles to buttonStyles, depending on it's condition
+// conditionally rendering css styles instead of class names in our component
+// supports same syntax
 
 const buttonStyles = css`
   background-color: black;
