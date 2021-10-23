@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import { connect } from "react-redux";
 
 import CollectionItem from "../../components/collection-item/collection-item.component";
@@ -34,6 +34,53 @@ const mapStateToProps = (state, ownProps) => ({
   // RESULT (o resultado do state vai ser sempre diferente, dependendo do nome da página, ou seja, o resultado
   // do collection vai ser diferente consoante o nome da página que foi clicada na página principal)
   // This selector needs a part of the state depending on the URL parameter!
+});
+
+export default connect(mapStateToProps)(CollectionPage);*/
+
+//AFTER 213
+import React from "react";
+import { connect } from "react-redux";
+
+import CollectionItem from "../../components/collection-item/collection-item.component";
+
+import { selectCollection } from "../../redux/shop/shop.selectors";
+
+import {
+  CollectionPageContainer,
+  CollectionTitle,
+  CollectionItemsContainer,
+} from "./collection.styles";
+
+const CollectionPage = ({ collection }) => {
+  /*useEffect(() => {
+    return () => {};
+  });*/
+
+  //
+  const { title, items } = collection;
+  return (
+    <CollectionPageContainer>
+      <CollectionTitle>{title}</CollectionTitle>
+      <CollectionItemsContainer>
+        {items.map((item) => (
+          <CollectionItem key={item.id} item={item} />
+        ))}
+      </CollectionItemsContainer>
+    </CollectionPageContainer>
+  );
+};
+
+// we can actually return a function from our useEffect function
+// the return function is what it is called a cleanup function
+// A CLEANUP FUNCTION: it is what useEffect calls when the Component unmounts
+// replicated/mimics the lifecycle method: componentWillUnmount()
+// useEffect can ONLY return back this cleanup function
+//
+//
+
+const mapStateToProps = (state, ownProps) => ({
+  collection: selectCollection(ownProps.match.params.collectionId)(state),
 });
 
 export default connect(mapStateToProps)(CollectionPage);
