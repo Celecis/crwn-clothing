@@ -1,3 +1,6 @@
 {
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "debug.javascript.defaultRuntimeExecutable": {
+    "pwa-node": "node"
+  }
 }
