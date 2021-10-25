@@ -300,7 +300,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(App);*/
 
 //AFTER 216
-import React, { useEffect } from "react";
+/*import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -360,4 +360,63 @@ const mapDispatchToProps = (dispatch) => ({
   checkUserSession: () => dispatch(checkUserSession()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);*/
+
+//AFTER 223
+import React, { useEffect } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+import "./App.css";
+
+import HomePage from "./pages/homepage/homepage.component";
+import ShopPage from "./pages/shop/shop.component";
+import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import CheckoutPage from "./pages/checkout/checkout.component";
+
+import Header from "./components/header/header.component";
+
+import { selectCurrentUser } from "./redux/user/user.selectors";
+import { checkUserSession } from "./redux/user/user.actions";
+
+const App = () => {
+  const currentUser = useSelector(selectCurrentUser);
+  // useSelector is the equivalent to mapStateToProps
+  // useSelector will always run whenever that selector function GETS A NEW VALUE
+  // this way we can garantee INSIDE OF OUR COMPONENT that our currentUser value
+  // will always update when that state value that the useSelector points to - selectCurrentUser - also changes
+  // useSelector CAN BE USED/CALLED/RUN MULTIPLE TIMES
+
+  const dispatch = useDispatch();
+  // useDispatch is the equivalent to mapDispatchToProps
+  // it uses same logic: whenever u call dispatch u pass it an object - the ACTION OBJECT
+
+  useEffect(() => {
+    dispatch(checkUserSession());
+  }, [dispatch]);
+
+  // useEffects needs there dependencies declared, because whenever the Component re-render
+  // any function that is inside of it WILL BE A NEW function / a new instance of that function
+  // because of that our useEffect will also run everytime there is a new function
+  // and because of that, useEffect needs to know where to get those values from
+
+  return (
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/shop" component={ShopPage} />
+        <Route exact path="/checkout" component={CheckoutPage} />
+        <Route
+          exact
+          path="/signin"
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
+          }
+        />
+      </Switch>
+    </div>
+  );
+};
+
+export default App;

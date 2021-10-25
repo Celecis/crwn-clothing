@@ -1,6 +1,8 @@
 body {
     font-family: 'Open Sans Condensed', sans-serif;
     padding: 2%;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .shop-page {

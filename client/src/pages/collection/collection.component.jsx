@@ -39,7 +39,7 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(mapStateToProps)(CollectionPage);*/
 
 //AFTER 213
-import React from "react";
+/*import React from "react";
 import { connect } from "react-redux";
 
 import CollectionItem from "../../components/collection-item/collection-item.component";
@@ -55,7 +55,7 @@ import {
 const CollectionPage = ({ collection }) => {
   /*useEffect(() => {
     return () => {};
-  });*/
+  });
 
   //
   const { title, items } = collection;
@@ -76,11 +76,53 @@ const CollectionPage = ({ collection }) => {
 // A CLEANUP FUNCTION: it is what useEffect calls when the Component unmounts
 // replicated/mimics the lifecycle method: componentWillUnmount()
 // useEffect can ONLY return back this cleanup function
-//
-//
 
 const mapStateToProps = (state, ownProps) => ({
   collection: selectCollection(ownProps.match.params.collectionId)(state),
 });
 
-export default connect(mapStateToProps)(CollectionPage);
+export default connect(mapStateToProps)(CollectionPage);*/
+
+//
+//AFTER 225
+import React from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import CollectionItem from "../../components/collection-item/collection-item.component";
+
+import { selectCollection } from "../../redux/shop/shop.selectors";
+
+import {
+  CollectionPageContainer,
+  CollectionTitle,
+  CollectionItemsContainer,
+} from "./collection.styles";
+
+const CollectionPage = () => {
+  const { collectionId } = useParams();
+  const collection = useSelector(selectCollection(collectionId));
+  //
+  //
+  const { title, items } = collection;
+  return (
+    <CollectionPageContainer>
+      <CollectionTitle>{title}</CollectionTitle>
+      <CollectionItemsContainer>
+        {items.map((item) => (
+          <CollectionItem key={item.id} item={item} />
+        ))}
+      </CollectionItemsContainer>
+    </CollectionPageContainer>
+  );
+};
+
+/*const mapStateToProps = (state, ownProps) => ({
+  collection: selectCollection(ownProps.match.params.collectionId)(state),
+});
+
+SAME AS:
+const collection = useSelector(selectCollection(collectionID));
+*/
+
+export default CollectionPage;
